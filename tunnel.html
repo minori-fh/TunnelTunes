@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tunnel Tunes</title>
+    <link rel = "stylesheet" type = "text/css" href = "tunnel.css" />
+    <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
     <style>
         body{
             margin: 0;
@@ -16,6 +18,12 @@
     </style>
 </head>
 <body>
+    <div id='sidebar'>
+        <img src='spotify.png' id='spotify'></img><br><br> 
+        Search Spotify: 
+        <br><input></input><br>
+        <button id='search'>SEARCH</button>
+    </div>
     <script type="x-shader/x-vertex" id="vertexshader">
         attribute float scale;
         void main() {

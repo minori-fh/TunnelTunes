@@ -1,0 +1,40 @@
+#sidebar {
+    position: absolute; 
+    z-index: 2; 
+    width: 20%; 
+    height: 100%; 
+    color: white; 
+    background: grey;
+    background-color: rgba(0,0,0,0.9); 
+    text-align: center; 
+    font-family: 'Manjari', sans-serif;
+}
+
+input{
+    margin-top: 7%; 
+    border-radius: 10px; 
+    width: 70%; 
+    border: none; 
+    height: 25px; 
+    outline: none; 
+}
+
+input[type='text']{
+    font-family: 'Manjari', sans-serif;
+    font-size: 14px; 
+}
+
+#spotify{
+    width: 30px;
+    margin-top: 75%; 
+}
+
+#search{
+    margin-top: 5%; 
+    background-color: #26bd00;
+    color: white; 
+    border: none; 
+    border-radius: 10px; 
+    padding: 3%; 
+    font-weight: bold; 
+}

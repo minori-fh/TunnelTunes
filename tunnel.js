@@ -1,4 +1,4 @@
-let scene, camera, renderer, cube;
+let scene, camera, renderer, cube, cubicle;
 let amountX = 50; 
 let amountY = 50;
 let numPoints = amountX * amountY; 
@@ -7,14 +7,14 @@ let mouseX = 0;
 let mouseY = 0; 
 let count = 0; 
 let particles; 
+let allCubes = [];
 
 function init(){
     // Create scene
     scene = new THREE.Scene();
     // Create perspective camera (FOV, degress, aspect, near plane, far plane)
     camera = new THREE.PerspectiveCamera(75, window.innerWidth/ window.innerHeight, 1, 10000);
-    camera.position.z = 1000; 
-    
+    camera.position.z = 1000;  
     
     // Create points positioning and scale
     let positions = new Float32Array(numPoints * 3); //3 for x y z positioning
@@ -35,9 +35,6 @@ function init(){
             j ++;
         }
     }
-
-    console.log(positions)
-    console.log(scales)
 
     // Create geometry
     let geometry = new THREE.BufferGeometry();
@@ -61,10 +58,14 @@ function init(){
     let cubeGeometry = new THREE.IcosahedronGeometry( 60, 0 );
     var cubeMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
     cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
-    cube.position.y = 200;
-    cube.position.z = -100; 
-    scene.add( cube );
-    
+    cube.position.z = Math.floor(Math.random() * 190) - 4000; //-4000 to 190
+    cube.position.y = Math.floor(Math.random() * 1100) + 150; //150 to 1100
+    cube.position.x = Math.floor(Math.random() * 5000) - 5000; //-5000 to 5000 
+    // scene.add( cube );
+
+    // Create a new cube every 2 seconds
+    // setInterval(createCubes, 4000)
+
     // WebGL Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight); //size of renderer
@@ -72,12 +73,42 @@ function init(){
     document.body.appendChild(renderer.domElement);
 }
 
+function createCubes(){
+    console.log('hi')
+    let moveSpeed = 4; 
+
+    let cubicleGeo = new THREE.IcosahedronGeometry( 60, 0 );
+    var cubicleMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    cubicle = new THREE.Mesh( cubicleGeo, cubicleMaterial );
+    cubicle.position.z = 190 //-4000 to 190
+    cubicle.position.y = Math.floor(Math.random() * 1100) + 150; //150 to 1100
+    cubicle.position.x = Math.floor(Math.random() * 10000) - 5000; //-5000 to 5000 
+    scene.add( cubicle );
+
+    direction = cubicle.getWorldDirection();
+
+    animateCubes();
+}
+
+function animateCubes(){
+    requestAnimationFrame( animateCubes );
+    cubicle.position.z -= 40; 
+}
+
 
 function animate() {
     requestAnimationFrame( animate );
     camera.position.set(0, 200, 200)
-    renderer.render( scene, camera )
+    // Call wave function 
     waves();
+
+    // Cube animation
+    cube.rotation.y += 0.01; 
+    cube.rotation.x += 0.01; 
+    cube.position.z += 40
+
+    // Render scene and camera
+    renderer.render( scene, camera )
 }
 
 function waves(){
@@ -90,7 +121,7 @@ function waves(){
     for ( let ix = 0; ix < amountX; ix ++ ) {
         for ( let iy = 0; iy < amountY; iy ++ ) {
             // change y positioning
-            positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 )) +
+            positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50) +
                             ( Math.sin( ( iy + count ) * 0.5 ) * 50);
             scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 5 +
                             ( Math.sin( ( iy + count ) * 0.5 ) + 1 )* 8;
