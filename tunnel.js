@@ -3,11 +3,10 @@ let amountX = 50;
 let amountY = 50;
 let numPoints = amountX * amountY; 
 let separation = 100; 
-let mouseX = 0; 
-let mouseY = 0; 
 let count = 0; 
 let particles; 
-let allCubes = [];
+
+var Spotify = require('node-spotify-api');
 
 function init(){
     // Create scene
@@ -147,3 +146,13 @@ window.addEventListener('resize', onWindowResize, false)
 
 init();
 animate();
+
+
+// spotify query starts here
+let search = document.getElementById('search')
+
+// event listener for when user clicks on search
+search.addEventListener("click", function(){
+    let searchTerms = document.querySelector('input').value
+    console.log(searchTerms)
+})
