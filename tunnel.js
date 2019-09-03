@@ -56,6 +56,14 @@ function init(){
     // Create points with geometry and material
     particles = new THREE.Points( geometry, material );
     scene.add( particles );
+
+    // Create cube
+    let cubeGeometry = new THREE.IcosahedronGeometry( 60, 0 );
+    var cubeMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+    cube = new THREE.Mesh( cubeGeometry, cubeMaterial );
+    cube.position.y = 200;
+    cube.position.z = -100; 
+    scene.add( cube );
     
     // WebGL Renderer
     renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -69,37 +77,34 @@ function animate() {
     requestAnimationFrame( animate );
     camera.position.set(0, 200, 200)
     renderer.render( scene, camera )
-    // render();
+    waves();
 }
 
 function waves(){
-    
+    let positions = particles.geometry.attributes.position.array;
+    let scales = particles.geometry.attributes.scale.array;
+
+    let i = 0;
+    let j = 0;
+
+    for ( let ix = 0; ix < amountX; ix ++ ) {
+        for ( let iy = 0; iy < amountY; iy ++ ) {
+            // change y positioning
+            positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 )) +
+                            ( Math.sin( ( iy + count ) * 0.5 ) * 50);
+            scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 5 +
+                            ( Math.sin( ( iy + count ) * 0.5 ) + 1 )* 8;
+            i += 3;
+            j ++;
+        }
+    }
+
+    particles.geometry.attributes.position.needsUpdate = true;
+    particles.geometry.attributes.scale.needsUpdate = true;
+
+    renderer.render( scene, camera );
+    count += 0.2;
 }
-
-// function render() {
-//     camera.position.x += ( mouseX - camera.position.x ) * .05;
-//     camera.position.y += ( - mouseY - camera.position.y ) * .05;
-//     camera.lookAt( scene.position );
-//     var positions = particles.geometry.attributes.position.array;
-//     var scales = particles.geometry.attributes.scale.array;
-//     var i = 0, j = 0;
-
-//     for ( var ix = 0; ix < AMOUNTX; ix ++ ) {
-//         for ( var iy = 0; iy < AMOUNTY; iy ++ ) {
-//             positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50 ) +
-//                             ( Math.sin( ( iy + count ) * 0.5 ) * 50 );
-//             scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 8 +
-//                             ( Math.sin( ( iy + count ) * 0.5 ) + 1 ) * 8;
-//             i += 3;
-//             j ++;
-//         }
-//     }
-
-//     particles.geometry.attributes.position.needsUpdate = true;
-//     particles.geometry.attributes.scale.needsUpdate = true;
-//     renderer.render( scene, camera );
-//     count += 0.1;
-// }
 
 function onWindowResize(){
     camera.aspect = window.innerWidth / window.innerHeight;
