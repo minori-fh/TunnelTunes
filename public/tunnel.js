@@ -154,6 +154,7 @@ let search = document.getElementById('search')
 
 // event listener for when user clicks on search
 search.addEventListener("click", function(){
+    let ID = "";
     let songElement = document.getElementById('songName');
     let imageElement = document.getElementById('songImage');
     let searchTerms = document.querySelector('input').value
@@ -170,8 +171,9 @@ search.addEventListener("click", function(){
         songName = data.tracks.items[0].name;
         artist = data.tracks.items[0].album.artists[0].name;
         imageUrl =  data.tracks.items[0].album.images[0].url;
-        ID = data.tracks.items[0].album.id
+        ID = data.tracks.items[0].uri.slice(14)
         previewUrl = data.tracks.items[0].preview_url
+
 
         songElement.appendChild(document.createTextNode(songName + " by " + artist));
         imageElement.setAttribute('src', imageUrl);
@@ -185,6 +187,32 @@ search.addEventListener("click", function(){
         if (previewUrl === null){
             errMsg.appendChild(document.createTextNode("Spotify does not have a preview for this song"))
         }
-    })
 
+        getAudioAnalysis(ID);
+    })
 })
+
+function getAudioAnalysis(ID){
+
+    // $.ajax({
+    //     url: "https://api.spotify.com/v1/audio-analysis/" + ID,
+    //     type: "GET",
+    //     dataType: 'json',
+    //     headers: {
+    //         "Authorization": "Bearer " + "BQCbv4I2vScSpwlYDEYSDqjJQyCit11gKgZevl5Y-JUdPdSxYTbs1dobzJM8Gszfj5hImSy48yTimQ_qGqA"
+    //     },
+    //     success: function(result){
+    //         console.log(result)
+    //     },
+    //     error: function(error){
+    //         console.log(error)
+    //     }
+    // })
+
+
+    console.log("client has been hit")
+    console.log("songID: " + ID)
+    $.get("/audioAnalysis/" + ID, function(data){
+        console.log(data);
+    })
+}
