@@ -1,4 +1,5 @@
 let scene, camera, renderer, cube, cubicle;
+let songName, artist, ID, imageUrl; 
 let amountX = 50; 
 let amountY = 50;
 let numPoints = amountX * amountY; 
@@ -153,11 +154,18 @@ search.addEventListener("click", function(){
     let searchTerms = document.querySelector('input').value
     console.log(searchTerms)
 
-    // spotify.search({ type: 'track', query: "hello"},function(err, data){
-    //     if(err){
-    //         console.log(err)
-    //     }
+    $.get("/" + searchTerms, function(data){
+        console.log("the data has come back!" + data);
 
-    //     console.log(data)
-    // })
+        songName = data.tracks.items[0].name;
+        artist = data.tracks.items[0].album.artists[0].name;
+        imageUrl =  data.tracks.items[0].album.images[0].url;
+        ID = data.tracks.items[0].album.id
+
+        console.log(songName);
+        console.log(artist);
+        console.log(imageUrl);
+        console.log(ID);
+    })
+
 })

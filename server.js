@@ -23,10 +23,23 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-// ROUTES: Root route to grab contents of home.html
+// ROUTE: Root route to grab contents of home.html
 app.get("/", function(req, res){
-    console.log("hitting this")
     res.sendFile(path.join(__dirname + "/public/tunnel.html"))
+});
+
+// ROUTE: Root for spotify api request
+app.get("/:songname", function(req, res){
+    console.log("hello this is the songname" + req.params.songname)
+
+    spotify.search({ type: 'track', query: req.params.songname},function(err, data){
+        if(err){
+            console.log(err)
+        }
+
+        res.send(data)
+    })
+
 });
 
 // Starting server
