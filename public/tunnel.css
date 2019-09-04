@@ -10,8 +10,16 @@
     font-family: 'Manjari', sans-serif;
 }
 
-input{
+#image {
+    height: 30%; 
+}
+
+#songImage {
+    height: 75%;
     margin-top: 7%; 
+}
+
+input{
     border-radius: 10px; 
     width: 70%; 
     border: none; 
@@ -21,12 +29,11 @@ input{
 
 input[type='text']{
     font-family: 'Manjari', sans-serif;
-    font-size: 14px; 
+    font-size: 12px; 
 }
 
 #spotify{
     width: 30px;
-    margin-top: 75%; 
 }
 
 #search{
@@ -34,7 +41,19 @@ input[type='text']{
     background-color: #26bd00;
     color: white; 
     border: none; 
-    border-radius: 10px; 
+    border-radius: 15px; 
     padding: 3%; 
     font-weight: bold; 
+}
+
+#listeningHeader {
+    margin-top: 10%; 
+}
+
+#searchHeader{
+    margin: 0 !important; 
+}
+
+#listeningHeader, #searchHeader {
+    font-size: 18px; 
 }

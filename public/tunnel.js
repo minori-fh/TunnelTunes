@@ -151,8 +151,12 @@ let search = document.getElementById('search')
 
 // event listener for when user clicks on search
 search.addEventListener("click", function(){
+    let songElement = document.getElementById('songName');
+    let imageElement = document.getElementById('songImage');
     let searchTerms = document.querySelector('input').value
-    console.log(searchTerms)
+    
+    //clear html DOM 
+    songElement.innerHTML = "";
 
     $.get("/" + searchTerms, function(data){
         console.log("the data has come back!" + data);
@@ -161,6 +165,10 @@ search.addEventListener("click", function(){
         artist = data.tracks.items[0].album.artists[0].name;
         imageUrl =  data.tracks.items[0].album.images[0].url;
         ID = data.tracks.items[0].album.id
+
+        songElement.appendChild(document.createTextNode(songName + " by " + artist));
+        imageElement.setAttribute('src', imageUrl);
+
 
         console.log(songName);
         console.log(artist);

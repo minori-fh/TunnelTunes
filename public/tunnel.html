@@ -20,10 +20,16 @@
 </head>
 <body>
     <div id='sidebar'>
+        <div id ='image'>
+            <img id='songImage'></img>
+        </div>
+
         <img src='spotify.png' id='spotify'></img><br><br> 
-        Search Spotify: 
+        <p id='searchHeader'>Search Spotify</p>
         <br><input></input><br>
         <button id='search'>SEARCH</button>
+        <p id='listeningHeader'>You are listening to... </p>
+        <p id='songName'></p>
     </div>
     <script type="x-shader/x-vertex" id="vertexshader">
         attribute float scale;
