@@ -43,7 +43,7 @@ function init(){
     // Create material
     let material = new THREE.ShaderMaterial( {
         uniforms: {
-            color: { value: new THREE.Color( 0xffffff ) },
+            color: { value: new THREE.Color( "#ffc0cb" ) },
         },
         vertexShader: document.getElementById( 'vertexshader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentshader' ).textContent
