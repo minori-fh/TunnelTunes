@@ -28,8 +28,13 @@
         <p id='searchHeader'>Search Spotify</p>
         <br><input></input><br>
         <button id='search'>SEARCH</button>
-        <p id='listeningHeader'>You are listening to... </p>
+        <p id='listeningHeader'>You are listening to: </p>
         <p id='songName'></p>
+        <p id='errorMsg'></p>
+
+        <audio>
+            <source id='preview' src='https://p.scdn.co/mp3-preview/0b90429fd554bad6785faa2b8931d613db4a0ee4?cid=56b106cec36f469da0f5cf2158c5d53c'>
+        </audio>
     </div>
     <script type="x-shader/x-vertex" id="vertexshader">
         attribute float scale;

@@ -147,6 +147,9 @@ init();
 animate();
 
 // SPOTIFY QUERY STARTS HERE //
+//implicit grant to grab access token
+
+
 let search = document.getElementById('search')
 
 // event listener for when user clicks on search
@@ -154,26 +157,34 @@ search.addEventListener("click", function(){
     let songElement = document.getElementById('songName');
     let imageElement = document.getElementById('songImage');
     let searchTerms = document.querySelector('input').value
+    let previewElement = document.getElementById('preview')
+    let audioControl = document.querySelector('audio')
+    let errMsg = document.getElementById('errorMsg')
     
     //clear html DOM 
     songElement.innerHTML = "";
+    errMsg.innerHTML = "";
 
     $.get("/" + searchTerms, function(data){
-        console.log("the data has come back!" + data);
 
         songName = data.tracks.items[0].name;
         artist = data.tracks.items[0].album.artists[0].name;
         imageUrl =  data.tracks.items[0].album.images[0].url;
         ID = data.tracks.items[0].album.id
+        previewUrl = data.tracks.items[0].preview_url
 
         songElement.appendChild(document.createTextNode(songName + " by " + artist));
         imageElement.setAttribute('src', imageUrl);
+        previewElement.setAttribute('src', previewUrl)
 
+        // Load and play song after grabbing previewURL
+        audioControl.load();
+        audioControl.play();
 
-        console.log(songName);
-        console.log(artist);
-        console.log(imageUrl);
-        console.log(ID);
+        // EDGE CASE: spotify does not have a preview URL 
+        if (previewUrl === null){
+            errMsg.appendChild(document.createTextNode("Spotify does not have a preview for this song"))
+        }
     })
 
 })
