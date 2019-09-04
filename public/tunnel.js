@@ -144,3 +144,20 @@ window.addEventListener('resize', onWindowResize, false)
 
 init();
 animate();
+
+// SPOTIFY QUERY STARTS HERE //
+let search = document.getElementById('search')
+
+// event listener for when user clicks on search
+search.addEventListener("click", function(){
+    let searchTerms = document.querySelector('input').value
+    console.log(searchTerms)
+
+    // spotify.search({ type: 'track', query: "hello"},function(err, data){
+    //     if(err){
+    //         console.log(err)
+    //     }
+
+    //     console.log(data)
+    // })
+})
