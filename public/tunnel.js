@@ -6,6 +6,7 @@ let numPoints = amountX * amountY;
 let separation = 100; 
 let count = 0; 
 let particles; 
+let counter = 0.21
 
 function init(){
     // Create scene
@@ -97,29 +98,25 @@ function animateCubes(){
 function animate() {
     requestAnimationFrame( animate );
     camera.position.set(0, 200, 200)
-    // Call wave function 
-    waves();
-
-    // Cube animation
-    cube.rotation.y += 0.01; 
-    cube.rotation.x += 0.01; 
-    cube.position.z += 40
+    // Call wave function
+    waves(counter);
 
     // Render scene and camera
     renderer.render( scene, camera )
 }
 
-function waves(){
+function waves(number){
     let positions = particles.geometry.attributes.position.array;
     let scales = particles.geometry.attributes.scale.array;
-
+    
+    console.log("this is the new counter" + counter)
     let i = 0;
     let j = 0;
 
     for ( let ix = 0; ix < amountX; ix ++ ) {
         for ( let iy = 0; iy < amountY; iy ++ ) {
             // change y positioning
-            positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 ) * 50) +
+            positions[ i + 1 ] = ( Math.sin( ( ix + count ) * 0.3 )) +
                             ( Math.sin( ( iy + count ) * 0.5 ) * 50);
             scales[ j ] = ( Math.sin( ( ix + count ) * 0.3 ) + 1 ) * 5 +
                             ( Math.sin( ( iy + count ) * 0.5 ) + 1 )* 8;
@@ -132,7 +129,7 @@ function waves(){
     particles.geometry.attributes.scale.needsUpdate = true;
 
     renderer.render( scene, camera );
-    count += 0.2;
+    count += number;
 }
 
 function onWindowResize(){
@@ -144,12 +141,9 @@ function onWindowResize(){
 window.addEventListener('resize', onWindowResize, false)
 
 init();
-animate();
+animate(counter);
 
 // SPOTIFY QUERY STARTS HERE //
-//implicit grant to grab access token
-
-
 let search = document.getElementById('search')
 
 // event listener for when user clicks on search
@@ -193,26 +187,19 @@ search.addEventListener("click", function(){
 })
 
 function getAudioAnalysis(ID){
-
-    // $.ajax({
-    //     url: "https://api.spotify.com/v1/audio-analysis/" + ID,
-    //     type: "GET",
-    //     dataType: 'json',
-    //     headers: {
-    //         "Authorization": "Bearer " + "BQCbv4I2vScSpwlYDEYSDqjJQyCit11gKgZevl5Y-JUdPdSxYTbs1dobzJM8Gszfj5hImSy48yTimQ_qGqA"
-    //     },
-    //     success: function(result){
-    //         console.log(result)
-    //     },
-    //     error: function(error){
-    //         console.log(error)
-    //     }
-    // })
-
-
     console.log("client has been hit")
     console.log("songID: " + ID)
     $.get("/audioAnalysis/" + ID, function(data){
-        console.log(data);
+        let tempo = data.track.tempo //tempo in BPM 
+        let tempPS = tempo / 60 //tempo in BPS (beats per second)
+        let finalCount = tempPS * 0.21
+        console.log(tempo)
+        console.log(tempPS)
+        console.log(finalCount)
+
+        counter = finalCount
+        // let temporaryCount = 0.21
+
+        // animate(finalCount)
     })
 }

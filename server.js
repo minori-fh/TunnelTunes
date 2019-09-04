@@ -63,7 +63,7 @@ app.get("/audioAnalysis/:ID", function(req, res){
 
     spotifyApi.getAudioAnalysisForTrack(req.params.ID)
         .then(function(data){
-            console.log("this is data.body" + data.body);
+            console.log("data.body" + data.body);
             res.send(data.body);
         }, function(err){
             console.log(err);
