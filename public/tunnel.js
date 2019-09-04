@@ -6,8 +6,6 @@ let separation = 100;
 let count = 0; 
 let particles; 
 
-var Spotify = require('node-spotify-api');
-
 function init(){
     // Create scene
     scene = new THREE.Scene();
@@ -146,13 +144,3 @@ window.addEventListener('resize', onWindowResize, false)
 
 init();
 animate();
-
-
-// spotify query starts here
-let search = document.getElementById('search')
-
-// event listener for when user clicks on search
-search.addEventListener("click", function(){
-    let searchTerms = document.querySelector('input').value
-    console.log(searchTerms)
-})
