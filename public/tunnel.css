@@ -63,3 +63,11 @@ input[type='text']{
     font-size: 12px; 
     font-weight: bold; 
 }
+
+#tempo {
+    position: fixed;
+    bottom: 0px;
+    margin-left: 1%;
+    color: green;
+    font-size: 12px;
+}

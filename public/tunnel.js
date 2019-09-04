@@ -159,6 +159,7 @@ search.addEventListener("click", function(){
     //clear html DOM 
     songElement.innerHTML = "";
     errMsg.innerHTML = "";
+    document.getElementById('tempo').innerHTML = "";
 
     $.get("/" + searchTerms, function(data){
 
@@ -187,17 +188,15 @@ search.addEventListener("click", function(){
 })
 
 function getAudioAnalysis(ID){
-    console.log("client has been hit")
-    console.log("songID: " + ID)
+    let tempoElement = document.getElementById('tempo');
+
     $.get("/audioAnalysis/" + ID, function(data){
         let tempo = data.track.tempo //tempo in BPM 
         let tempPS = tempo / 60 //tempo in BPS (beats per second)
         let finalCount = tempPS * 0.21
-        console.log(tempo)
-        console.log(tempPS)
-        console.log(finalCount)
 
         counter = finalCount
+        tempoElement.appendChild(document.createTextNode("Tempo: " + tempo + " BPM"));
         // let temporaryCount = 0.21
 
         // animate(finalCount)
