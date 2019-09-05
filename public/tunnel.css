@@ -18,15 +18,15 @@
     width: 8%; 
     padding-left: 1%; 
     font-family: 'Manjari', sans-serif;
-    color: white; 
+    color: #ffffff; 
     background: grey;
     background-color: rgba(0,0,0,0.9); 
     text-align: center; 
-    height: 40%; 
+    height: 30%; 
     font-size: 12px; 
 }
 
-#speedSlow, #speedNormal, #speedFast {
+#speedSlow, #speedFast {
     width: 60%; 
     background-color: #26bd00;
     color: white; 

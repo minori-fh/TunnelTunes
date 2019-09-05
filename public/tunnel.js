@@ -43,7 +43,7 @@ function init(){
     // Create material
     let material = new THREE.ShaderMaterial( {
         uniforms: {
-            color: { value: new THREE.Color( "#ffc0cb" ) },
+            color: { value: new THREE.Color( "#ffffff" ) },
         },
         vertexShader: document.getElementById( 'vertexshader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentshader' ).textContent
@@ -142,6 +142,31 @@ window.addEventListener('resize', onWindowResize, false)
 
 init();
 animate(counter);
+
+// Event listener to personalize speed
+// let slow = document.getElementById('speedSlow');
+// let normal = document.getElementById('normalSlow');
+// let fast = document.getElementById('speedFast');
+
+// let speedButton = document.getElementsByClassName('speed')
+
+$(".speed").click(function(){
+    let speed = this.id
+    console.log(speed)
+
+    if(speed === 'speedFast'){
+        counter = counter * 2
+    } else if (speed === 'speedSlow'){
+        counter = counter / 2
+    } 
+})
+
+
+// speedButton.addEventListener("click", function(){
+//     console.log("click function working")
+//     let speed = this.id
+//     console.log(speed)
+// })
 
 // SPOTIFY QUERY STARTS HERE //
 let search = document.getElementById('search')
