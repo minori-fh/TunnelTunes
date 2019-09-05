@@ -1,5 +1,5 @@
 {
-  "name": "TunnelTunes",
+  "name": "WaveTunes",
   "version": "1.0.0",
   "description": "",
   "main": "keys.js",
@@ -8,15 +8,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/minori-fh/TunnelTunes.git"
+    "url": "git+https://github.com/minori-fh/WaveTunes.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/minori-fh/TunnelTunes/issues"
+    "url": "https://github.com/minori-fh/WaveTunes/issues"
   },
-  "homepage": "https://github.com/minori-fh/TunnelTunes#readme",
+  "homepage": "https://github.com/minori-fh/WaveTunes#readme",
   "dependencies": {
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
